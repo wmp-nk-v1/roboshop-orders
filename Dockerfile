@@ -10,4 +10,7 @@ RUN dnf install -y java-17-openjdk-headless && dnf clean all
 WORKDIR /app
 COPY --from=build /app/target/orders.jar .
 EXPOSE 8007
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["java", "-jar", "orders.jar"]
